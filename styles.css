@@ -396,7 +396,9 @@ ul { list-style: none; }
 /* ---------- EXPERIENCE ---------- */
 .experience { background: var(--bg-primary); }
 .exp-card {
-  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   padding: 36px;
@@ -404,7 +406,39 @@ ul { list-style: none; }
   margin: 0 auto;
   transition: var(--transition);
 }
+.exp-card .slideshow-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transition: opacity 0.8s ease;
+}
+.exp-card .slideshow-bg.fade-out { opacity: 0; }
+.exp-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,15,26,0.92) 0%, rgba(10,15,26,0.78) 50%, rgba(10,15,26,0.88) 100%);
+  z-index: 1;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
 .exp-card:hover { border-color: var(--accent); }
+.exp-card:hover::after {
+  background: linear-gradient(135deg, rgba(10,15,26,0.88) 0%, rgba(10,15,26,0.7) 50%, rgba(10,15,26,0.82) 100%);
+}
+.exp-header,
+.exp-duties {
+  position: relative;
+  z-index: 2;
+}
+.exp-card .slideshow-dots {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  z-index: 3;
+}
 .exp-header {
   display: flex;
   align-items: flex-start;
@@ -466,6 +500,80 @@ ul { list-style: none; }
   font-weight: 500;
 }
 .project-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ---------- PROJECT SLIDESHOW ---------- */
+.project-slideshow {
+  position: relative;
+  overflow: hidden;
+  padding: 0; /* padding moves to content */
+  min-height: 280px;
+  cursor: default;
+  background: transparent; /* let slideshow-bg show through */
+}
+.slideshow-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+  background-color: var(--bg-card); /* fallback while image loads */
+}
+.slideshow-bg.fade-out { opacity: 0; }
+.project-slideshow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 26, 0.75) 0%,
+    rgba(10, 15, 26, 0.85) 40%,
+    rgba(10, 15, 26, 0.92) 100%
+  );
+  pointer-events: none;
+}
+.project-content {
+  position: relative;
+  z-index: 2;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.project-slideshow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.project-slideshow:hover::after {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 26, 0.55) 0%,
+    rgba(10, 15, 26, 0.7) 40%,
+    rgba(10, 15, 26, 0.88) 100%
+  );
+}
+
+/* Slideshow dots */
+.slideshow-dots {
+  position: absolute;
+  bottom: 14px;
+  right: 20px;
+  z-index: 3;
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+.slideshow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: var(--transition);
+}
+.slideshow-dot.active { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
 
 /* ---------- SKILLS ---------- */
 .skills { background: var(--bg-primary); }

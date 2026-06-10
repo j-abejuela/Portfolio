@@ -204,4 +204,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---------- PROJECT SLIDESHOW ----------
+  const slideshowCards = document.querySelectorAll('.project-slideshow');
+
+  slideshowCards.forEach(card => {
+    const project = card.getAttribute('data-project');
+    const imageCount = parseInt(card.getAttribute('data-image-count'), 10);
+    const bg = card.querySelector('.slideshow-bg');
+    if (!project || !imageCount || !bg) return;
+
+    let currentIdx = 0;
+    const images = [];
+
+    // Preload all images
+    for (let i = 1; i <= imageCount; i++) {
+      const img = new Image();
+      img.src = `projects/${project}/${i}.jpg`;
+      images.push(img.src);
+    }
+
+    // Set first image
+    bg.style.backgroundImage = `url(${images[0]})`;
+
+    // Build dot indicators
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'slideshow-dots';
+    for (let i = 0; i < imageCount; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'slideshow-dot';
+      if (i === 0) dot.classList.add('active');
+      dotsContainer.appendChild(dot);
+    }
+    card.appendChild(dotsContainer);
+    const dots = dotsContainer.querySelectorAll('.slideshow-dot');
+
+    // Cycle images
+    function nextImage() {
+      bg.classList.add('fade-out');
+      dots[currentIdx].classList.remove('active');
+
+      setTimeout(() => {
+        currentIdx = (currentIdx + 1) % imageCount;
+        bg.style.backgroundImage = `url(${images[currentIdx]})`;
+        bg.classList.remove('fade-out');
+        dots[currentIdx].classList.add('active');
+      }, 800); // match CSS transition duration
+    }
+
+    // Change every 3.5 seconds
+    let interval;
+    if (imageCount > 1) {
+      interval = setInterval(nextImage, 3500);
+    }
+
+    // Pause on hover
+    card.addEventListener('mouseenter', () => clearInterval(interval));
+    card.addEventListener('mouseleave', () => {
+      if (imageCount > 1) {
+        interval = setInterval(nextImage, 3500);
+      }
+    });
+  });
+
 });
