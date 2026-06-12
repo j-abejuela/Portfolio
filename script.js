@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- SCROLL REVEAL (Intersection Observer) ----------
   const revealElements = document.querySelectorAll(
-    '.section, .project-card, .cert-card, .exp-card, .timeline-item, .affil-item, .seminar-item, .skill-category'
+    '.section, .project-card, .comp-card, .cert-card, .exp-card, .timeline-item, .affil-item, .seminar-item, .skill-category'
   );
 
   if ('IntersectionObserver' in window) {
@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   slideshowCards.forEach(card => {
     const project = card.getAttribute('data-project');
     const imageCount = parseInt(card.getAttribute('data-image-count'), 10);
+    const folder = card.getAttribute('data-folder') || 'projects';
     const bg = card.querySelector('.slideshow-bg');
     if (!project || !imageCount || !bg) return;
 
@@ -219,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Preload all images
     for (let i = 1; i <= imageCount; i++) {
       const img = new Image();
-      img.src = `projects/${project}/${i}.jpg`;
+      img.src = `${folder}/${project}/${i}.jpg`;
       images.push(img.src);
     }
 

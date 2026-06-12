@@ -646,6 +646,72 @@ a.cert-card:hover .cert-view {
   transform: translateY(0);
 }
 
+/* ---------- COMPETITIONS ---------- */
+.competitions { background: var(--bg-secondary); }
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.comp-card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+.comp-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.comp-card .slideshow-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.8s ease;
+  z-index: 0;
+}
+.comp-card .slideshow-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 15, 26, 0.92) 0%, rgba(10, 15, 26, 0.55) 100%);
+}
+.comp-content {
+  position: relative;
+  z-index: 1;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+}
+.comp-medal { font-size: 2rem; margin-bottom: 8px; }
+.comp-card h3 {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.comp-event {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.comp-desc {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.comp-team {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-top: auto;
+}
+
 /* ---------- AFFILIATIONS ---------- */
 .affiliations { background: var(--bg-primary); }
 .affil-list { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
