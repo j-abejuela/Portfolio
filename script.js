@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const typewriter = document.getElementById('typewriter');
   if (typewriter) {
     const phrases = [
-      'Electronics Engineer',
+      'Electronics Engineering Student',
       'IoT Developer',
       'Embedded Systems Enthusiast',
-      'ML Integrator',
+      'Machine Learning Integrator',
       'PCB Designer'
     ];
     let phraseIdx = 0;
