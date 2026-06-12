@@ -647,7 +647,7 @@ a.cert-card:hover .cert-view {
 }
 
 /* ---------- COMPETITIONS ---------- */
-.competitions { background: var(--bg-secondary); }
+.highlights { background: var(--bg-secondary); }
 .comp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
